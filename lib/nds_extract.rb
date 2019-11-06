@@ -47,25 +47,21 @@ end
 
 
 def gross_per_studio(collection)
-  collection.each_with_object(Hash.new(0)) { |g,h| h[g[:studio]] += g[:worldwide_gross]}
+  binding.pry
+  gross_result = collection.sum {|h| h[:worldwide_gross]}
+  #collection.each_with_object(Hash.new(0)) { |g,h| h[g[:studio]] += g[:worldwide_gross]}
 end
 
 def movies_with_directors_set(source)
-  line_items = source.map { |h| { name: h[:name], movies: h[:movies] } }
+  
+  line_items = source.map do |h| 
+    result = []
+    result << { title: h[:title], director_name: h[:name] } 
+    result
+  end
+ 
 end  
 
-
-  result
-  # GOAL: For each director, find their :movies Array and stick it in a new Array
-  #
-  # INPUT:
-  # * source: An Array of Hashes containing director information including
-  # :name and :movies
-  #
-  # RETURN:
-  #
-  # Array of Arrays containing all of a director's movies. Each movie will need
-  # to have a :director_name key added to it.
 
 
 
@@ -80,15 +76,4 @@ def studios_totals(nds)
 end
 
 
-  # GOAL: For each Hash in an Array (movies_collection), provide a collection of movies and a directors name to the movie_with_director_name method and accumulate the returned Array of movies into a new Array that's returned by this method.
-  
-  
-  # INPUT:
-  # * name: A director's name
-  # * movies_collection: An Array of Hashes where each Hash represents a movie
-  #
-  # RETURN:
-  #
-  # Array of Hashes where each Hash represents a movie; however, they should all have a
-  # :director_name key. This addition can be done by using the provided
-  # movie_with_director_name method
+ 
