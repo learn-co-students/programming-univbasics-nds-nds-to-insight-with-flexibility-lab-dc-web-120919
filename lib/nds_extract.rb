@@ -47,9 +47,19 @@ end
 
 
 def gross_per_studio(collection)
-  binding.pry
-  gross_result = collection.sum {|h| h[:worldwide_gross]}
-  #collection.each_with_object(Hash.new(0)) { |g,h| h[g[:studio]] += g[:worldwide_gross]}
+  hash = {}
+  index = 0 
+  
+  while index < collection.size do
+    if hash[collection[index][:studio]]
+      hash[collection[index][:studio]] += collection[index][:worldwide_gross]
+      
+      else
+        hash[collection[index][:studio]] = collection[index][:worldwide_gross]
+      end
+    index += 1 
+  end 
+  hash
 end
 
 def movies_with_directors_set(source)
