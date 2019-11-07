@@ -60,18 +60,30 @@ def gross_per_studio(collection)
     index += 1 
   end 
   hash
+  
+   while index < collection.size do
+     #binding.pry
+      hash[collection[index][:studio]] = collection[index][:worldwide_gross]
+      
+      index += 1 
+      
+      
+    end
+    hash
 end
 
 def movies_with_directors_set(source)
   
-  line_items = source.map do |h| 
-    result = []
-    result << { title: h[:title], director_name: h[:name] } 
-    result
+  source.map do |h| 
+    movies_with_director_key(h[:name], h[:movies])
+  
   end
  
 end  
 
+#when given a Hash with keys :name and :movies,
+#returns an Array of Hashes that represent movies
+#and each Hash has a :director_name key set with the value that was in :name
 
 
 
